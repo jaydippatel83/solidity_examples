@@ -14,13 +14,13 @@ contract TaxToken is ERC20{
     function transfer(address to, uint amount) public override returns(bool) {
 
         uint balanceSender= balanceOf(msg.sender);
-        require(balanceSender >= amount,"ERC20: Not enough Money to send"); 
+        require(balanceSender >= amount,"ERC20: Not enough Money to transfer"); 
 
         uint taxAmount = amount / taxDivisior;
         uint transferAmount = amount - taxAmount;
 
         _transfer(msg.sender,to, transferAmount);
-        _transfer(msg.sender, address(0), taxAmount);  
+        _transfer(msg.sender,0x0000000000000000000000000000000000000000, taxAmount);  
 
         return true;
     }
